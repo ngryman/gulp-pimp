@@ -47,7 +47,7 @@ var a = require('app/components/a.js');
 var b = require('app/components/b.js');
 ```
 
-### CSS/SASS
+### CSS/SASS/LESS
 
 ```javascript
 return gulp.src('app/components/_*.scss', { read: false })
