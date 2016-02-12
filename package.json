@@ -1,0 +1,51 @@
+{
+  "name": "gulp-pimp",
+  "version": "0.0.0",
+  "description": "Pimp your imports!",
+  "author": "Nicolas Gryman <ngryman@gmail.com> (http://ngryman.sh)",
+  "license": "MIT",
+  "repository": "ngryman/gulp-pimp",
+  "main": "index.js",
+  "engines": {
+    "node": ">=4"
+  },
+  "files": [
+    "index.js",
+    "lib/"
+  ],
+  "scripts": {
+    "lint": "eslint --parser babel-eslint *.js lib/*.js test/*.js",
+    "spec": "nyc ava",
+    "test": "npm run lint -s && npm run spec -s",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "watch": "onchange index.js lib/*.js test/*.js -- npm test"
+  },
+  "keywords": [
+    "pimp",
+    "import",
+    "imports",
+    "require",
+    "commonjs",
+    "discovery",
+    "reducer",
+    "concat"
+  ],
+  "dependencies": {
+    "gulp-util": "^3.0.7",
+    "through2": "^2.0.1"
+  },
+  "devDependencies": {
+    "ava": "^0.11.0",
+    "babel-eslint": "^4.1.8",
+    "coveralls": "^2.11.6",
+    "eslint": "^1.10.3",
+    "eslint-config-ngryman": "^0.2.2",
+    "gulp": "^3.9.1",
+    "micromatch": "^2.3.7",
+    "nyc": "^5.3.0",
+    "object-defaults": "^0.1.0",
+    "onchange": "^2.0.0",
+    "stream-array": "^1.1.1",
+    "stream-assert": "^2.0.3"
+  }
+}

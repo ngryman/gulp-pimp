@@ -1,0 +1,18 @@
+{
+  "extends": "ngryman",
+
+  "env": {
+    "node": true
+  },
+
+  "ecmaFeatures": {
+    "modules": true
+  },
+
+  "rules": {
+    "no-console": 0,
+    "strict": 0,
+    "func-style": 0,
+    "no-sync": 0
+  }
+}
