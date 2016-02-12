@@ -18,7 +18,7 @@ import them in your main file. Then you can process those imports with the tool 
 This allows you to develop in a modular way and split your files however you like, without having
 to maintain some sort of *manifest* somewhere in your app.
 
-It supports `commonjs`, `es6`, `sass`, `less`, `css` by default. But you can customize it of course.
+It supports `commonjs`, `sass`, `less`, `css` by default. But you can customize it of course.
 
 You can also use `pimp` as a [reducer](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Array/reduce)
 of input files to an output file.
