@@ -46,6 +46,7 @@
     "object-defaults": "^0.1.0",
     "onchange": "^2.0.0",
     "stream-array": "^1.1.1",
-    "stream-assert": "^2.0.3"
+    "stream-assert": "^2.0.3",
+    "tap": "^5.4.3"
   }
 }
