@@ -32,6 +32,8 @@
   ],
   "dependencies": {
     "gulp-util": "^3.0.7",
+    "micromatch": "^2.3.7",
+    "object-defaults": "^0.1.0",
     "through2": "^2.0.1"
   },
   "devDependencies": {
@@ -40,10 +42,7 @@
     "coveralls": "^2.11.6",
     "eslint": "^1.10.3",
     "eslint-config-ngryman": "^0.2.2",
-    "gulp": "^3.9.1",
-    "micromatch": "^2.3.7",
     "nyc": "^5.3.0",
-    "object-defaults": "^0.1.0",
     "onchange": "^2.0.0",
     "stream-array": "^1.1.1",
     "stream-assert": "^2.0.3"
