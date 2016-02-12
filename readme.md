@@ -4,8 +4,8 @@
 [npm-url]: https://npmjs.org/package/gulp-pimp
 [travis-image]: https://img.shields.io/travis/ngryman/gulp-pimp.svg?style=flat
 [travis-url]: https://travis-ci.org/ngryman/gulp-pimp
-[coveralls-image]: https://img.shields.io/coveralls/ngryman/gulp-pimp.svg
-[coveralls-url]: https://coveralls.io/ngryman/gulp-pimp
+[coveralls-image]: https://coveralls.io/repos/ngryman/gulp-pimp/badge.svg?service=github
+[coveralls-url]: https://coveralls.io/github/ngryman/gulp-pimp
 
 > Pimp your imports!
 
