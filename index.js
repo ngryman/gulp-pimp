@@ -6,8 +6,8 @@ const util = require('gulp-util')
 const fs = require('fs')
 const path = require('path')
 
-const pimp = function(file, opts) {
-  if (!file) {
+const pimp = function(manifest, opts) {
+  if (!manifest) {
     throw new util.PluginError('pimp', 'No index file specified')
   }
 
@@ -22,8 +22,8 @@ const pimp = function(file, opts) {
   const imports = new Imports(opts)
 
   let indexFile = new util.File({
-    path: path.join(process.cwd(), file),
-    contents: fs.existsSync(file) ? fs.readFileSync(file) : null
+    path: path.join(process.cwd(), manifest),
+    contents: fs.existsSync(manifest) ? fs.readFileSync(manifest) : null
   })
 
   return through2.obj(function(file, encoding, callback) {
