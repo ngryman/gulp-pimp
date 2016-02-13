@@ -16,7 +16,8 @@ test('pushes a file', t => {
     name: 'index',
     ext: '.js',
     basename: 'index.js',
-    path: '/foo/app/index.js'
+    path: '/foo/app/index.js',
+    contents: undefined
   })
 })
 
@@ -92,4 +93,27 @@ test('accepts an outro function ', t => {
   imports.push(createFile('sass/_reset.scss'))
 
   t.same(imports.toString(), "@import '/foo/sass/_reset.scss';\nBRAINZ")
+})
+
+test('reduces to an object', t => {
+  const imports = new Imports()
+  imports.push(createFile('sass/_reset.scss'))
+  imports.push(createFile('sass/_mixins.scss'))
+
+  t.same(imports.toData(), {
+    _reset: {
+      name: '_reset',
+      ext: '.scss',
+      basename: '_reset.scss',
+      path: '/foo/sass/_reset.scss',
+      contents: undefined
+    },
+    _mixins: {
+      name: '_mixins',
+      ext: '.scss',
+      basename: '_mixins.scss',
+      path: '/foo/sass/_mixins.scss',
+      contents: undefined
+    }
+  })
 })

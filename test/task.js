@@ -5,13 +5,23 @@ import array from 'stream-array'
 import { File } from 'gulp-util'
 
 const testStream = (...files) => {
-  return array(files.map(file =>
-    new File({
+  return array(files.map(file => {
+    let name, contents
+    if (Array.isArray(file)) {
+      name = file[0]
+      contents = new Buffer(file[1])
+    }
+    else {
+      name = file
+    }
+
+    return new File({
       cwd: '/foo',
       base: '/foo/bar',
-      path: `/foo/bar/${file}`
+      path: `/foo/bar/${name}`,
+      contents
     })
-  ))
+  }))
 }
 
 test('throws when no index file is specified', t => {
@@ -65,5 +75,26 @@ test.cb('accepts a reducer in place of options', t => {
     .pipe(assert.first(
       d => t.same(d.contents.toString(), 'ab')
     ))
+    .pipe(assert.end(t.end))
+})
+
+test.cb('passes a data property', t => {
+  testStream(['a.js', 'content'])
+    .pipe(pimp('app.js', { data: true }))
+    .pipe(assert.first(d => {
+      t.is(typeof d.data, 'object')
+      t.is(d.data.a, 'content')
+    }))
+    .pipe(assert.end(t.end))
+})
+
+test.cb('passes a deep data property', t => {
+  testStream(['a.js', 'content'])
+    .pipe(pimp('app.js', { data: 'components' }))
+    .pipe(assert.first(d => {
+      t.is(typeof d.data, 'object')
+      t.is(typeof d.data.components, 'object')
+      t.is(d.data.components.a, 'content')
+    }))
     .pipe(assert.end(t.end))
 })

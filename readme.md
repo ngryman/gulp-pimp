@@ -12,22 +12,20 @@
 ![](http://i.giphy.com/YjJZKbm2kNN7i.gif)
 
 
-`pimp` uses the power of `gulp` to discover your modules/components/whatever and automatically
-import them in your main file. Then you can process those imports with the tool of your choice.
+`pimp` discovers your modules/components/whatever and automatically imports them in the file you
+want. You can then process it with the tool of your choice.
+It supports `commonjs`, `sass`, `less`, `css` by default. You can customize everything, of course.
 
-This allows you to develop in a modular way and split your files however you like, without having
-to maintain some sort of *manifest* somewhere in your app.
-
-It supports `commonjs`, `sass`, `less`, `css` by default. But you can customize it of course.
-
-You can also use `pimp` as a [reducer](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Array/reduce)
-of input files to an output file.
+That's not all, `pimp` is also a [reducer],
+so you can use it for other purposes than simply importing stuff. As it's compatible with all
+plugins consuming [gulp-data], you can use it with template
+engines for example.
 
 
 ## Install
 
 ```bash
-npm install --save-dev gulp-import
+npm install --save-dev gulp-pimp
 ```
 
 ## Usage
@@ -83,7 +81,7 @@ return gulp.src('app/components/*.html', { read: false })
 
 #### `manifest` <sup><sub>`{string}`</sub></sup>
 
-Name of the manifest file. If the file already exists, imports are appended to the end.
+Name of the manifest file. If it already exists, imports are appended to the end of the file.
 If not the file is created.
 
 #### `options` <sup><sub>`{object|function}`</sub></sup>
@@ -93,11 +91,11 @@ Set of options. If a `function` is passed, this is equivalent to the [reducer](#
 ##### `rules` <sup><sub>`{object}`</sub></sup>
 
 A set of rules to apply to input files.
-A rule is a `key-value` pair. The `key` is a [glob](https://github.com/isaacs/node-glob#glob-primer) to match, and the `value`
+A rule is a `key-value` pair. The `key` is a [glob] to match, and the `value`
 is a template string that will be used to output the import statement.
 
 The template string accepts several variables that will vary for each file being processed:
- - `${name}`: name of the file, without the extention
+ - `${name}`: name of the file, without the extension
  - `${path}`: absolute path of the file
 
 <b>Example</b>:
@@ -113,12 +111,13 @@ pimp('app.js', {
 
 The reducer gives you full control over statement substitution. It is called for each file.
 The function has 2 arguments:
- - `output`: which is the final output of all statements
+ - `output`: which is the final output of all statements, or the `data` attribute if [data](#user-content-data-booleanstring) is specified
  - `file`
    - `name`: name of the file, without the extension
    - `ext`: extension of the file
    - `basename`: name of the file, with the extension
    - `path`: absolute path of the file
+   - `contents`: contents of the file as a `string`
 
 As it's a reducer, make sure to always return `output`.
 
@@ -135,6 +134,18 @@ Executed just before the `reducer`, it gives you the ability to setup and prepen
 
 Executed just after the `reducer`, it gives you the ability to cleanup and append something to `output`.
 
+##### `data` <sup><sub>`{boolean|string}`</sub></sup>
+
+Alters `pimp` behavior by adding a `data` attribute to the manifest file, without modifying its
+content. This is mainly designed to be used with other plugins that consume [gulp-data].
+If `data` is a `string`, collected files will be set in the given namespace (i.e. `data.components`).
+
+`data` makes `pimp` switch of reducer. If you specify a custom `reducer`, it will take an object
+as first argument, instead of a string. `intro` and `outro` will have no effect.
+
+Note that you should remove `{ read: false }` when using this as you might actually need contents
+of your collected files.
+
 ## Rules
 
 But default, `pimp` comes with default rules:
@@ -145,7 +156,7 @@ But default, `pimp` comes with default rules:
 }
 ```
 
-If you want to aler those default, you can alter the `pimp.RULES` object.
+If you want to modify those default, you can alter the `pimp.RULES` object.
 
 ## Moar examples
 
@@ -171,7 +182,36 @@ pimp('app.js', {
 })
 ```
 
+### Templates
+
+This is an idea of what can be done using `data`.
+
+Here is an `index.html` which will be processed by [gulp-template]:
+```html
+<body>
+  <%= components.header %>
+  <main>
+    <%= components.content %>
+    <%= components.aside %>
+  </main>
+  <%= components.footer %>
+</body>
+```
+
+`pimp` collects components and passes then to `gulp-template`:
+```
+gulp.src('app/components/*/*.html')
+  .pipe(pimp('index.html', { data: 'components' }))
+  .pipe(template(pkg))
+  .pipe(gulp.dest('dist/'))
+```
+
 
 ## License
 
 MIT © [Nicolas Gryman](http://ngryman.sh)
+
+[reducer]: https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Array/reduce
+[glob]: https://github.com/isaacs/node-glob#glob-primer
+[gulp-data]: https://github.com/colynb/gulp-data
+[gulp-template]: https://github.com/sindresorhus/gulp-template

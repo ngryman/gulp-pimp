@@ -21,7 +21,7 @@ const pimp = function(manifest, opts) {
 
   const imports = new Imports(opts)
 
-  let indexFile = new util.File({
+  let manifestFile = new util.File({
     path: path.join(process.cwd(), manifest),
     contents: fs.existsSync(manifest) ? fs.readFileSync(manifest) : null
   })
@@ -31,18 +31,26 @@ const pimp = function(manifest, opts) {
     callback()
   }, function(callback) {
     const statements = new Buffer(imports.toString())
-
     if (statements.length > 0) {
-      if (Buffer.isBuffer(indexFile.contents)) {
-        indexFile.contents = Buffer.concat([indexFile.contents, statements])
+      if (Buffer.isBuffer(manifestFile.contents)) {
+        manifestFile.contents = Buffer.concat([manifestFile.contents, statements])
       }
       else {
-        indexFile.contents = statements
+        manifestFile.contents = statements
       }
-
-      this.push(indexFile)
     }
 
+    if (opts.data) {
+      manifestFile.data = {}
+      if ('string' === typeof opts.data) {
+        manifestFile.data[opts.data] = imports.toData()
+      }
+      else {
+        manifestFile.data = imports.toData()
+      }
+    }
+
+    this.push(manifestFile)
     callback()
   })
 }
