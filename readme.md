@@ -4,7 +4,7 @@
 [npm-url]: https://npmjs.org/package/gulp-pimp
 [travis-image]: https://img.shields.io/travis/ngryman/gulp-pimp.svg?style=flat
 [travis-url]: https://travis-ci.org/ngryman/gulp-pimp
-[codecov-image]: https://codecov.io/github/ngryman/gulp-pimp/coverage.svg
+[codecov-image]: https://img.shields.io/codecov/c/github/ngryman/gulp-pimp.svg
 [codecov-url]: https://codecov.io/github/ngryman/gulp-pimp
 
 > Pimp your imports!
