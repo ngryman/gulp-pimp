@@ -1,4 +1,4 @@
-# gulp-pimp [![npm][npm-image]][npm-url] [![travis][travis-image]][travis-url] [![coveralls][coveralls-image]][coveralls-url]
+# gulp-pimp [![npm][npm-image]][npm-url] [![travis][travis-image]][travis-url] [![codecov][codecov-image]][codecov-url]
 
 [npm-image]: https://img.shields.io/npm/v/gulp-pimp.svg?style=flat
 [npm-url]: https://npmjs.org/package/gulp-pimp
