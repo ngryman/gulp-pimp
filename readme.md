@@ -151,7 +151,7 @@ of your collected files.
 But default, `pimp` comes with default rules:
 ```javascript
 {
-  '*.{scss,css}': "@import '${path}';",
+  '*.{scss,less,css}': "@import '${path}';",
   '*.{js,jsx}': "var ${name} = require('${path}');"
 }
 ```
