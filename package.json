@@ -28,7 +28,10 @@
     "commonjs",
     "discovery",
     "reducer",
-    "concat"
+    "concat",
+    "gulp",
+    "data",
+    "template"
   ],
   "dependencies": {
     "gulp-util": "^3.0.7",
