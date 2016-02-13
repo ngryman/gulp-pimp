@@ -17,7 +17,7 @@
     "lint": "eslint --parser babel-eslint *.js lib/*.js test/*.js",
     "spec": "nyc ava",
     "test": "npm run lint -s && npm run spec -s",
-    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "coverage": "nyc report --reporter=text-lcov | codecov",
     "watch": "onchange index.js lib/*.js test/*.js -- npm test"
   },
   "keywords": [
@@ -42,7 +42,7 @@
   "devDependencies": {
     "ava": "^0.11.0",
     "babel-eslint": "^4.1.8",
-    "coveralls": "^2.11.6",
+    "codecov.io": "^0.1.6",
     "eslint": "^1.10.3",
     "eslint-config-ngryman": "^0.2.2",
     "nyc": "^5.3.0",
