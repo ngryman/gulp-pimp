@@ -1,13 +1,6 @@
 import Imports from '../lib/imports'
 import test from 'ava'
 
-const createFile = (filename) => {
-  return {
-    relative: `${filename}`,
-    path: `/foo/${filename}`
-  }
-}
-
 test('pushes a file', t => {
   const imports = new Imports()
   imports.push(createFile('app/index.js'))
@@ -117,3 +110,10 @@ test('reduces to an object', t => {
     }
   })
 })
+
+function createFile(filename) {
+  return {
+    relative: `${filename}`,
+    path: `/foo/${filename}`
+  }
+}

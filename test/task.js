@@ -4,26 +4,6 @@ import assert from 'stream-assert'
 import array from 'stream-array'
 import { File } from 'gulp-util'
 
-const testStream = (...files) => {
-  return array(files.map(file => {
-    let name, contents
-    if (Array.isArray(file)) {
-      name = file[0]
-      contents = new Buffer(file[1])
-    }
-    else {
-      name = file
-    }
-
-    return new File({
-      cwd: '/foo',
-      base: '/foo/bar',
-      path: `/foo/bar/${name}`,
-      contents
-    })
-  }))
-}
-
 test('throws when no index file is specified', t => {
   t.throws(() => {
     pimp()
@@ -98,3 +78,23 @@ test.cb('passes a deep data property', t => {
     }))
     .pipe(assert.end(t.end))
 })
+
+function testStream(...files) {
+  return array(files.map(file => {
+    let name, contents
+    if (Array.isArray(file)) {
+      name = file[0]
+      contents = new Buffer(file[1])
+    }
+    else {
+      name = file
+    }
+
+    return new File({
+      cwd: '/foo',
+      base: '/foo/bar',
+      path: `/foo/bar/${name}`,
+      contents
+    })
+  }))
+}

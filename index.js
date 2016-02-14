@@ -6,7 +6,7 @@ const util = require('gulp-util')
 const fs = require('fs')
 const path = require('path')
 
-const pimp = function(manifest, opts) {
+function pimp(manifest, opts) {
   if (!manifest) {
     throw new util.PluginError('pimp', 'No index file specified')
   }
