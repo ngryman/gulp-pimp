@@ -111,6 +111,8 @@ test('reduces to an object', t => {
   })
 })
 
+/* -------------------------------------------------------------------------- */
+
 function createFile(filename) {
   return {
     relative: `${filename}`,

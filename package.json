@@ -18,7 +18,7 @@
     "spec": "nyc ava",
     "test": "npm run lint -s && npm run spec -s",
     "coverage": "nyc report --reporter=text-lcov | codecov",
-    "watch": "onchange index.js lib/*.js test/*.js -- npm test"
+    "dev": "npm test; onchange {,*/}*.js -- npm test"
   },
   "keywords": [
     "pimp",

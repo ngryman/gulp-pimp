@@ -79,6 +79,8 @@ test.cb('passes a deep data property', t => {
     .pipe(assert.end(t.end))
 })
 
+/* -------------------------------------------------------------------------- */
+
 function testStream(...files) {
   return array(files.map(file => {
     let name, contents
