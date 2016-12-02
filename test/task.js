@@ -15,17 +15,17 @@ test.cb('creates an index file when it does not exists', t => {
     .pipe(pimp('index.scss'))
     .pipe(assert.length(1))
     .pipe(assert.first(
-      d => t.same(d.contents.toString(), "@import '/foo/bar/_reset.scss';\n"))
+      d => t.is(d.contents.toString(), "@import '/foo/bar/_reset.scss';\n"))
     )
     .pipe(assert.end(t.end))
 })
 
 test.cb('appends imports to an existing index file', t => {
   testStream('header.js', 'footer.js')
-    .pipe(pimp('fixtures/app.js'))
+    .pipe(pimp('test/fixtures/app.js'))
     .pipe(assert.length(1))
     .pipe(assert.first(
-      d => t.same(d.contents.toString(),
+      d => t.is(d.contents.toString(),
         "/** Cornflakes */\nvar header = require('/foo/bar/header.js');\n" +
         "var footer = require('/foo/bar/footer.js');\n"
       )
@@ -43,7 +43,7 @@ test.cb('replaces rules when specified', t => {
     }))
     .pipe(assert.length(1))
     .pipe(assert.first(
-      d => t.same(d.contents.toString(), '^/foo/bar/woot.js^\n\n^wut^\n\n')
+      d => t.is(d.contents.toString(), '^/foo/bar/woot.js^\n\n^wut^\n\n')
     ))
     .pipe(assert.end(t.end))
 })
@@ -53,7 +53,7 @@ test.cb('accepts a reducer in place of options', t => {
     .pipe(pimp('app.js', (output, file) => output + file.name))
     .pipe(assert.length(1))
     .pipe(assert.first(
-      d => t.same(d.contents.toString(), 'ab')
+      d => t.is(d.contents.toString(), 'ab')
     ))
     .pipe(assert.end(t.end))
 })

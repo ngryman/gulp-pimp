@@ -5,7 +5,7 @@ test('pushes a file', t => {
   const imports = new Imports()
   imports.push(createFile('app/index.js'))
 
-  t.same(imports.index[0], {
+  t.deepEqual(imports.index[0], {
     name: 'index',
     ext: '.js',
     basename: 'index.js',
@@ -18,7 +18,7 @@ test('automatically seralizes javascript imports', t => {
   const imports = new Imports()
   imports.push(createFile('index.js'))
 
-  t.same(imports.toString(), "var index = require('/foo/index.js');\n")
+  t.is(imports.toString(), "var index = require('/foo/index.js');\n")
 })
 
 test('automatically seralizes sass imports', t => {
@@ -26,7 +26,7 @@ test('automatically seralizes sass imports', t => {
   imports.push(createFile('sass/_reset.scss'))
   imports.push(createFile('sass/_mixins.scss'))
 
-  t.same(imports.toString(),
+  t.is(imports.toString(),
     "@import '/foo/sass/_reset.scss';\n@import '/foo/sass/_mixins.scss';\n"
   )
 })
@@ -34,7 +34,7 @@ test('automatically seralizes sass imports', t => {
 test('returns an empty string when no imports was pushed', t => {
   const imports = new Imports()
 
-  t.same(imports.toString(), '')
+  t.is(imports.toString(), '')
 })
 
 test('accepts custom rules', t => {
@@ -46,7 +46,7 @@ test('accepts custom rules', t => {
   imports.push(createFile('sass/_reset.scss'))
   imports.push(createFile('sass/_mixins.scss'))
 
-  t.same(imports.toString(), "Sapristi!@import '/foo/sass/_mixins.scss';\n")
+  t.is(imports.toString(), "Sapristi!@import '/foo/sass/_mixins.scss';\n")
 })
 
 test('accepts custom rules with a function handler', t => {
@@ -57,7 +57,7 @@ test('accepts custom rules with a function handler', t => {
   })
   imports.push(createFile('sass/_reset.scss'))
 
-  t.same(imports.toString(), '/foo/sass/_reset.scss')
+  t.is(imports.toString(), '/foo/sass/_reset.scss')
 })
 
 test('accepts a custom reducer ', t => {
@@ -67,7 +67,7 @@ test('accepts a custom reducer ', t => {
   imports.push(createFile('sass/_reset.scss'))
   imports.push(createFile('sass/_mixins.scss'))
 
-  t.same(imports.toString(), '_reset_mixins')
+  t.is(imports.toString(), '_reset_mixins')
 })
 
 test('accepts an intro function ', t => {
@@ -76,7 +76,7 @@ test('accepts an intro function ', t => {
   })
   imports.push(createFile('sass/_reset.scss'))
 
-  t.same(imports.toString(), "BRAINZ@import '/foo/sass/_reset.scss';\n")
+  t.is(imports.toString(), "BRAINZ@import '/foo/sass/_reset.scss';\n")
 })
 
 test('accepts an outro function ', t => {
@@ -85,7 +85,7 @@ test('accepts an outro function ', t => {
   })
   imports.push(createFile('sass/_reset.scss'))
 
-  t.same(imports.toString(), "@import '/foo/sass/_reset.scss';\nBRAINZ")
+  t.is(imports.toString(), "@import '/foo/sass/_reset.scss';\nBRAINZ")
 })
 
 test('reduces to an object', t => {
@@ -93,7 +93,7 @@ test('reduces to an object', t => {
   imports.push(createFile('sass/_reset.scss'))
   imports.push(createFile('sass/_mixins.scss'))
 
-  t.same(imports.toData(), {
+  t.deepEqual(imports.toData(), {
     _reset: {
       name: '_reset',
       ext: '.scss',
