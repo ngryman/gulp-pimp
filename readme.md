@@ -1,5 +1,7 @@
 # gulp-pimp [![npm][npm-image]][npm-url] [![travis][travis-image]][travis-url] [![codecov][codecov-image]][codecov-url]
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/ngryman/gulp-pimp.svg)](https://greenkeeper.io/)
+
 [npm-image]: https://img.shields.io/npm/v/gulp-pimp.svg?style=flat
 [npm-url]: https://npmjs.org/package/gulp-pimp
 [travis-image]: https://img.shields.io/travis/ngryman/gulp-pimp.svg?style=flat

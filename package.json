@@ -36,11 +36,11 @@
   "dependencies": {
     "gulp-util": "^3.0.7",
     "micromatch": "^2.3.11",
-    "object-defaults": "^0.1.0",
+    "object-defaults": "^1.0.0",
     "through2": "^2.0.3"
   },
   "devDependencies": {
-    "ava": "^0.17.0",
+    "ava": "^0.19.1",
     "babel-eslint": "^7.1.1",
     "codecov.io": "^0.1.6",
     "eslint": "^3.11.1",
